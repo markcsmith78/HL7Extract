@@ -1,0 +1,9 @@
+MSH|^~\&|TEST_APP|TEST_FAC|EXTRACTOR|DEV|20260424071500||ADT^A01^ADT_A01|MSG000001|P|2.5.1
+EVN|A01|20260424071500|||^ADAMS^JULIA^^^^^^NPI
+PID|1||123456^^^TEST_FAC^MR~67890^^^STATE^SS||DOE^JOHN^A||19800514~19800513|M|||123 MAIN ST^^DURANGO^CO^81301^USA||970-555-1000|||M||987654321
+PV1|1|I|MEDSURG^201^A^TEST_FAC||||1234^SMITH^ROBERT^^^^^^NPI|5678^JONES^AMY^^^^^^NPI|||||||||||V1234567|||||||||||||||||||||||||20260424071000
+PV2|||Admitted for abdominal pain and dehydration|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||Expected discharge in 2 days
+DG1|1||R10.9^Unspecified abdominal pain^I10|Abdominal pain|20260424070000|A
+OBX|1|NM|8480-6^Systolic blood pressure^LN||138|mm[Hg]^millimeter of mercury^UCUM|90-120|H|||F|||20260424071200
+OBX|2|NM|8462-4^Diastolic blood pressure^LN||86|mm[Hg]^millimeter of mercury^UCUM|60-80|H|||F|||20260424071200
+OBX|3|ST|SS001^Chief complaint^PHINQUESTION||Abdominal pain with nausea||||||F|||20260424071200

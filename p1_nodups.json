@@ -1,0 +1,49 @@
+[
+    {
+        "name" : "Test", 
+        "required" : "R",
+        "source" : [
+            {
+                "notation" : "PV1-3",
+	            "segment": "PV1",
+	            "segment_repetition": 0,
+	            "field": 3,
+	            "field_repetition": 0,
+	            "component" : 0,
+	            "subcomponent": 0
+            }
+        ] 
+    },
+    {
+        "name" : "Admit_Reason_Description",
+        "required" : "RE",
+        "source" : [ 
+            {
+                "notation" : "PV2-3",
+	            "segment" : "PV2",
+                "segment_repetition" : 0,
+	            "field": 3,
+                "field_repetition":0,
+	            "component" : 0,
+                "subcomponent" : 0
+            }
+        ]
+    }, 
+    {
+        "name"  : "Diagnosis_Code",
+        "required" : "RE",
+        "source" : [
+            {
+                "notation" : "DG1-3.1",
+                "segment" : "DG1",
+                "segment_repetition" : 0,
+                "field" : 3,
+                "field_repetition":0,
+                "component" : 1,
+                "subcomponent" : 0 
+            }
+        ]
+    }
+]
+                
+        	
