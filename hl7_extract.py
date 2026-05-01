@@ -26,17 +26,14 @@ class HL7Extract:
         self.hl7_msg = hl7.parse(msg)
 
     def extract_field(self, el):
-    
         if isinstance(self.hl7_msg[el['segment']][el['segment_repetition']][el['field']][el['field_repetition']], list):
             return '^'.join(self.flatten_strings(self.hl7_msg[el['segment']][el['segment_repetition']][el['field']][el['field_repetition']]))
         else:
             return self.hl7_msg[el['segment']][el['segment_repetition']][el['field']][el['field_repetition']]
 
     def extract_component(self, el):
-
-        #TODO: manage repeating components, subcomponents
-        #if isinstance(self.hl7_msg[el['segment']][el['segment_repetition']][el['field']][el['field_repetition']], list):
-            return self.hl7_msg[el['segment']][el['segment_repetition']][el['field']][el['field_repetition']][el['component']][el['subcomponent']]
+        #TODO: test components, subcomponents
+        return self.hl7_msg[el['segment']][el['segment_repetition']][el['field']][el['field_repetition']][el['component']][el['subcomponent']]
 
 
     def flatten_strings(self, data):
@@ -60,12 +57,12 @@ class HL7Extract:
 	    #    the only component  (see #3)
         
         for el in self.nssp_json:
-
-            print(f'Name: {el["name"]}')
+        #TODO: add propper debugging 
+            #print(f'Name: {el["name"]}')
             for src in el['source']: 
 
-                print(f"\tNotation: {src['notation']}")
-                print(f"\t[{src['segment']}][{src['segment_repetition']}][{src['field']}][{src['field_repetition']}][{src['component']}][{src['subcomponent']}]")
+                #print(f"\tNotation: {src['notation']}")
+                #print(f"\t[{src['segment']}][{src['segment_repetition']}][{src['field']}][{src['field_repetition']}][{src['component']}][{src['subcomponent']}]")
                 # FIELD only
                 if src['component'] == 0:
                     extract = self.extract_field(src) 
