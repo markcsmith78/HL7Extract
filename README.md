@@ -24,17 +24,39 @@ integration needs.
     PV1|1|I|MEDSURG^201^A||||||||||||||||||||||||||||||||||||||||||||202401011159
 
 ## Example Configuration
-
-    [
-      {
-        "name": "Admit_Date_Time",
-        "notation": "PV1-44.1"
-      },
-      {
-        "name": "Patient_ID",
-        "notation": "PID-3.1"
-      }
-    ]
+Fields, components and subcomponents use a 1-based index.
+[
+    {
+        "name" : "Admit_Date_Time", 
+        "required" : "R",
+        "source" : [
+            {
+                "notation" : "PV1-44.1",
+	            "segment": "PV1",
+	            "segment_repetition": 0,
+	            "field": 44,
+	            "field_repetition": 0,
+	            "component" : 1,
+	            "subcomponent": 0
+            }
+        ] 
+    },
+    {
+        "name" : "Admit_Reason_Description",
+        "required" : "RE",
+        "source" : [ 
+            {
+                "notation" : "PV2-3",
+	            "segment" : "PV2",
+                "segment_repetition" : 0,
+	            "field": 3,
+                "field_repetition":0,
+	            "component" : 0,
+                "subcomponent" : 0
+            }
+        ]
+    } 
+]
 
 ## Example Output
 

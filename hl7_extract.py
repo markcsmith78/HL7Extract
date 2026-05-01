@@ -33,7 +33,8 @@ class HL7Extract:
 
     def extract_component(self, el):
         #TODO: test components, subcomponents
-        return self.hl7_msg[el['segment']][el['segment_repetition']][el['field']][el['field_repetition']][el['component']][el['subcomponent']]
+        component = el['component'] - 1 
+        return self.hl7_msg[el['segment']][el['segment_repetition']][el['field']][el['field_repetition']][component][el['subcomponent']]
 
 
     def flatten_strings(self, data):

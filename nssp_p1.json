@@ -1,0 +1,154 @@
+[
+    {
+        "name" : "Admit_Date_Time", 
+        "required" : "R",
+        "source" : [
+            {
+                "notation" : "PV1-44.1",
+	            "segment": "PV1",
+	            "segment_repetition": 0,
+	            "field": 44,
+	            "field_repetition": 0,
+	            "component" : 1,
+	            "subcomponent": 0
+            }
+        ] 
+    },
+    {
+        "name" : "Admit_Reason_Description",
+        "required" : "RE",
+        "source" : [ 
+            {
+                "notation" : "PV2-3",
+	            "segment" : "PV2",
+                "segment_repetition" : 0,
+	            "field": 3,
+                "field_repetition":0,
+	            "component" : 0,
+                "subcomponent" : 0
+            }
+        ]
+    }, 
+    {
+        "name"  : "Diagnosis_Code",
+        "required" : "RE",
+        "source" : [
+            {
+                "notation" : "DG1-3.1",
+                "segment" : "DG1",
+                "segment_repetition" : 0,
+                "field" : 3,
+                "field_repetition":0,
+                "component" : 1,
+                "subcomponent" : 0 
+            }
+        ]
+    },
+    {
+        "name"  : "Diagnosis_Description",
+        "required" : "RE",
+        "source" : [
+            {
+                "notation" : "DG1-3.2",
+                "segment" : "DG1",
+                "segment_repetition" : 0,
+                "field" : 3,
+                "field_repetition":0,
+                "component" : 2,
+                "subcomponent" : 0 
+            }
+        ]
+    },
+    {
+        "name"  : "Patient_Class_Code",
+        "required" : "R",
+        "source" : [
+            {
+                "notation" : "PV1-2",
+                "segment" : "PV1",
+                "segment_repetition" : 0,
+                "field" : 2,
+                "field_repetition":0,
+                "component" : 0,
+                "subcomponent" : 0 
+            }
+        ]
+    },
+    {
+        "name"  : "Patient_Zip",
+        "required" : "RE",
+        "source" : [
+            {
+                "notation" : "PID-11.5",
+                "segment" : "PID",
+                "segment_repetition" : 0,
+                "field" : 11,
+                "field_repetition":0,
+                "component" : 5,
+                "subcomponent" : 0 
+            }
+        ]
+    },
+    {
+        "name"  : "Processing_ID",
+        "required" : "R",
+        "source" : [
+            {
+                "notation" : "MSH-11.1",
+                "segment" : "MSH",
+                "segment_repetition" : 0,
+                "field" : 11,
+                "field_repetition":0,
+                "component" : 1,
+                "subcomponent" : 0 
+            }
+        ]
+    },
+    {
+        "name"  : "Sending_Facility_ID",
+        "required" : "R",
+        "source" : [
+            {
+                "notation" : "MSH-4",
+                "segment" : "MSH",
+                "segment_repetition" : 0,
+                "field" : 4,
+                "field_repetition":0,
+                "component" : 0,
+                "subcomponent" : 0 
+            }
+        ]
+    },
+    {
+        "name"  : "Trigger_Event",
+        "required" : "R",
+        "source" : [
+            {
+                "notation" : "MSH-9.2",
+                "segment" : "MSH",
+                "segment_repetition" : 0,
+                "field" : 9,
+                "field_repetition":0,
+                "component" : 2,
+                "subcomponent" : 0 
+            }
+        ]
+    },
+    {
+        "name"  : "Visit_ID",
+        "required" : "R",
+        "source" : [
+            {
+                "notation" : "PV1-19",
+                "segment" : "PV1",
+                "segment_repetition" : 0,
+                "field" : 19,
+                "field_repetition":0,
+                "component" : 0,
+                "subcomponent" : 0 
+            }
+        ]
+    }
+]
+                
+        	
