@@ -1,0 +1,10 @@
+MSH|^~\&|TEST_APP|TEST_FAC|EXTRACTOR|DEV|20260424073500||ADT^A08^ADT_A01|MSG000003|P|2.5.1
+EVN|A08|20260424073500|||^LEE^MICHAEL^^^^^^NPI
+PID|1||345678^^^TEST_FAC^MR||BROWN^SAMUEL^T||19471102|M|||789 PINE RD^^CORTEZ^CO^81321^USA||970-555-3333|||M||222334444
+PV1|1|E|ED^05^B^TEST_FAC||||3333^WILSON^ERIN^^^^^^NPI|4444^NGUYEN^DAVID^^^^^^NPI|||||||||||E4567890|||||||||||||||||||||||||20260424073000
+PV2|||Emergency visit for shortness of breath|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||Observation status pending
+DG1|1||R06.02^Shortness of breath^I10|Shortness of breath|20260424073100|A
+DG1|2||I50.9^Heart failure, unspecified^I10|Heart failure|20260424073200|W
+OBX|1|NM|59408-5^Oxygen saturation in Arterial blood by Pulse oximetry^LN||89|%^percent^UCUM|95-100|L|||F|||20260424073300
+OBX|2|NM|9279-1^Respiratory rate^LN||26|/min^per minute^UCUM|12-20|H|||F|||20260424073300
+OBX|3|ST|SS003^Triage note^PHINQUESTION||Patient reports worsening dyspnea over two days||||||F|||20260424073400

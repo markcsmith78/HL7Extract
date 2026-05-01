@@ -1,0 +1,10 @@
+MSH|^~\&|TEST_APP|TEST_FAC|EXTRACTOR|DEV|20260424072500||ADT^A04^ADT_A01|MSG000002|P|2.5.1
+EVN|A04|20260424072500|||^MILLER^KAREN^^^^^^NPI
+PID|1||789012^^^TEST_FAC^MR||MARTINEZ^ELENA^R||19920322|F|||456 OAK AVE^^FARMINGTON^NM^87401^USA||505-555-2222|||S||555443333
+PV1|1|O|CLINIC^03^1^TEST_FAC||||2222^PATEL^NISHA^^^^^^NPI||||||||||||V7654321|||||||||||||||||||||||||20260424072000
+PV2|||Outpatient evaluation for cough and fever|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||Discharge home after evaluation
+DG1|1||R05.9^Cough, unspecified^I10|Cough|20260424072100|A
+DG1|2||R50.9^Fever, unspecified^I10|Fever|20260424072100|A
+OBX|1|NM|8310-5^Body temperature^LN||38.4|Cel^degree Celsius^UCUM|36.1-37.2|H|||F|||20260424072200
+OBX|2|NM|8867-4^Heart rate^LN||104|/min^per minute^UCUM|60-100|H|||F|||20260424072200
+OBX|3|CWE|94531-1^SARS-CoV-2 RNA panel^LN||260373001^Detected^SCT||||||F|||20260424072300
