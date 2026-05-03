@@ -51,14 +51,14 @@ HL7Extract was developed to bridge the gap between raw clinical message streams 
 
 ### Input (HL7 Message)
 
-<pre>'''
+<pre>
 MSH|^~\&|TEST_APP|TEST_FAC|EXTRACTOR|DEV|20260424071500||ADT^A01^ADT_A01|MSG000001|P|2.5.1
 EVN|A01|20260424071500|||^ADAMS^JULIA^^^^^^NPI
 ...
-'''</pre>
+</pre>
 
 ### Extraction Configuration
-<pre>'''
+<pre>
 [    
     {
         "name"  : "Trigger_Event",
@@ -76,34 +76,17 @@ EVN|A01|20260424071500|||^ADAMS^JULIA^^^^^^NPI
         ]
     }
 ]
-'''</pre>
+</pre>
 ### Output
-<pre>'''
+<pre>
 mark@drop1:~/src/HL7Extract$ python3 -m pdb ./extract_example.py msh_example.json msh_example.hl7
-> /home/mark/src/HL7Extract/extract_example.py(3)<module>()
--> from hl7_extract import HL7Extract
-(Pdb) n
-> /home/mark/src/HL7Extract/extract_example.py(4)<module>()
--> import sys
-(Pdb) 
-> /home/mark/src/HL7Extract/extract_example.py(6)<module>()
--> if len(sys.argv) < 3:
-(Pdb) 
-> /home/mark/src/HL7Extract/extract_example.py(10)<module>()
--> extr = HL7Extract(sys.argv[1], sys.argv[2])
-(Pdb) 
-> /home/mark/src/HL7Extract/extract_example.py(11)<module>()
--> ret = extr.extract_all_hl7()
-(Pdb) 
-> /home/mark/src/HL7Extract/extract_example.py(13)<module>()
--> for key in ret:
 (Pdb) p extr.hl7_msg
 [[['MSH'], ['|'], ['^~\\&'], ['TEST_APP'], ['TEST_FAC'], ['EXTRACTOR'], ['DEV'], ['20260424071500'], [''], [[['ADT'], ['A01'], ['ADT_A01']]], ['MSG000001'], ['P'], ['2.5.1']], [['EVN'], ['A01'], ['20260424071500'], [''], [''], [[[''], ['ADAMS'], ['JULIA'], [''], [''], [''], [''], [''], ['NPI']]]]]
 (Pdb) p extr.hl7_msg['MSH']
 [[['MSH'], ['|'], ['^~\\&'], ['TEST_APP'], ['TEST_FAC'], ['EXTRACTOR'], ['DEV'], ['20260424071500'], [''], [[['ADT'], ['A01'], ['ADT_A01']]], ['MSG000001'], ['P'], ['2.5.1']]]
 (Pdb) p ret
 {'Trigger_Event': 'A01'}
-'''</pre>
+</pre>
 ---
 
 ## Installation
