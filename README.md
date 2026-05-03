@@ -51,12 +51,14 @@ HL7Extract was developed to bridge the gap between raw clinical message streams 
 
 ### Input (HL7 Message)
 
+<pre>'''
 MSH|^~\&|TEST_APP|TEST_FAC|EXTRACTOR|DEV|20260424071500||ADT^A01^ADT_A01|MSG000001|P|2.5.1
 EVN|A01|20260424071500|||^ADAMS^JULIA^^^^^^NPI
 ...
+'''</pre>
 
 ### Extraction Configuration
-
+<pre>'''
 [    
     {
         "name"  : "Trigger_Event",
@@ -74,9 +76,9 @@ EVN|A01|20260424071500|||^ADAMS^JULIA^^^^^^NPI
         ]
     }
 ]
-
+'''</pre>
 ### Output
-
+<pre>'''
 mark@drop1:~/src/HL7Extract$ python3 -m pdb ./extract_example.py msh_example.json msh_example.hl7
 > /home/mark/src/HL7Extract/extract_example.py(3)<module>()
 -> from hl7_extract import HL7Extract
@@ -101,6 +103,7 @@ mark@drop1:~/src/HL7Extract$ python3 -m pdb ./extract_example.py msh_example.jso
 [[['MSH'], ['|'], ['^~\\&'], ['TEST_APP'], ['TEST_FAC'], ['EXTRACTOR'], ['DEV'], ['20260424071500'], [''], [[['ADT'], ['A01'], ['ADT_A01']]], ['MSG000001'], ['P'], ['2.5.1']]]
 (Pdb) p ret
 {'Trigger_Event': 'A01'}
+'''</pre>
 ---
 
 ## Installation
