@@ -37,7 +37,7 @@ HL7Extract was developed to bridge the gap between raw clinical message streams 
 ## Features
 
 - HL7 v2.x message parsing  
-- Configurable field extraction using HL7 notation (e.g., `PV1-44.1`)  
+- Configurable field extraction using JSON notation
 - Support for:
   - Segment repetition  
   - Field repetition  
