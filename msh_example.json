@@ -1,0 +1,17 @@
+[    
+    {
+        "name"  : "Trigger_Event",
+        "required" : "R",
+        "source" : [
+            {
+                "notation" : "MSH-9.2",
+                "segment" : "MSH",
+                "segment_repetition" : 0,
+                "field" : 9,
+                "field_repetition":0,
+                "component" : 2,
+                "subcomponent" : 0 
+            }
+        ]
+    }
+]
