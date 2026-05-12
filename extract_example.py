@@ -1,7 +1,11 @@
 #!/usr/bin/python3
 
 from hl7_extract import HL7Extract
+from logging_setup import setup_logging
 import sys
+import logging
+
+setup_logging(debug=True)
 
 if len(sys.argv) < 3:
    print("Usage: hl7_extract <config.json> <msg.hl7>")

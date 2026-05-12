@@ -1,0 +1,43 @@
+Rules for editing/creating json files to define parsing behavior:
+
+The configuration file is a JSON list of element location definitions.
+This is an example of a single definition (PV1-44.1):
+    {
+        "name" : "Admit_Date_Time", 
+        "required" : "R",
+        "source" : [
+            {
+                "notation" : "PV1-44.1",
+	        "segment": "PV1",
+	        "segment_repetition": 0,
+	        "field": 44,
+	        "field_repetition": 0,
+	        "component" : 1,
+	        "subcomponent": 0
+            }
+        ] 
+    }
+
+Currently, all key/value pairs must be represented.  That is, there must be a
+"segment", "segment_repetition", "field", etc., key and there must be a value
+associated with each key.  If the key is not used, then a value of 0 
+is associated with it.  This applies to segment and field repetition as well as
+component and subcomponents.  If they are not used, they are assigned a 0 value.
+
+The "notation" key/value is not used for computation.  It acts as a human-readable
+representation of the element that is being extracted.  Since HL7 v2.x specification 
+is ambiguous, commonly accepted formatting should be used:
+ 	- Repeated segments are represented with brackets and a (zero based) index
+	following the segment identifier.  For example, the second OBX segement
+	will be indicated by 'OBX[1]'
+	- Fields follow the '-' after the segment.  'PV1-44' represents the entire
+	44th field of the PV1 segment.  Note that this is not affected by components --
+	if they exist, they are all included as part of the field.
+	- Components follow a '.' after the field.  'PV1-44.1' represents the first 
+	component in the 44th field of the PV1 segment.
+	- Subcomponents follow a second '.'.  'PV1-44.1.1' represents the first 
+	subcomponent of the first component of the 44th field of the PV1 segment.
+
+
+
+
