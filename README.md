@@ -1,6 +1,8 @@
 # HL7Extract
 
 HL7Extract is an open-source Python framework for transforming raw HL7 v2.x message streams into structured, analysis-ready datasets. It is designed to support clinical data analysis, interoperability workflows, and downstream applications such as quality reporting, research, and machine learning.
+To be fair, extracting fields from HL7 messages is not edge-of-your-seat exciting.  It doesn't make for good dinner convesation and it's not status update material.  But, if you're troubleshooting interfaces or analyzing large sets of HL7 messages, this is for you.  HL7Extract relieves you of the burden of counting out 'pipes' and 'hats'.  It wrassles unweildly HL7 messages that wrap several lines in your text editor into the manageable, domesticated set of fields you're interested in.  Everything else stays outside in the wild.
+
 
 ---
 
