@@ -15,10 +15,10 @@ class HL7Extract:
        
         # open & process JSON config 
         try: 
-            with open(json_file) as ifile:
+            with open("rules/" + json_file) as ifile:
                 self.nssp_json = json.load(ifile)
         except FileNotFoundError:
-            self.logger.critical(f"File not found: {json_file}.")
+            self.logger.critical(f"File not found: rules/{json_file}.")
             sys.exit(1)
         except json.JSONDecodeError as e:
             self.logger.critical(f"Invalid JSON: {e}")
@@ -26,7 +26,7 @@ class HL7Extract:
 
         # open & process hl7 input
         try:
-            with open(hl7_file, "r") as ifile:
+            with open("input/" + hl7_file, "r") as ifile:
                 msg = ifile.read()
         except FileNotFoundError:
             self.logger.critical(f"ERROR: File not found {hl7_file}.")
@@ -34,7 +34,6 @@ class HL7Extract:
 
         msg = msg.replace('\r\n', '\r').replace('\n', '\r')
         self.hl7_msg = hl7.parse(msg)
-
 
 
     def extract_field(self, el):
