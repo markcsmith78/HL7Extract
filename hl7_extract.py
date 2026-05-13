@@ -2,28 +2,40 @@
 
 import json
 import hl7
+import logging
+import sys
 
 class HL7Extract:
 
     def __init__(self, json_file, hl7_file):
         self.hl7_value = []
-        
+
+        # system
+        self.logger = logging.getLogger(__name__)
+       
+        # open & process JSON config 
         try: 
             with open(json_file) as ifile:
                 self.nssp_json = json.load(ifile)
         except FileNotFoundError:
-            print("File not found.")
+            self.logger.critical(f"File not found: {json_file}.")
+            sys.exit(1)
         except json.JSONDecodeError as e:
-            print(f"Invalid JSON: {e}")
+            self.logger.critical(f"Invalid JSON: {e}")
+            sys.exit(1)
 
+        # open & process hl7 input
         try:
             with open(hl7_file, "r") as ifile:
                 msg = ifile.read()
         except FileNotFoundError:
-            print(f"ERROR: File not found {file_path}.")
+            self.logger.critical(f"ERROR: File not found {hl7_file}.")
+            sys.exit(1)
 
         msg = msg.replace('\r\n', '\r').replace('\n', '\r')
         self.hl7_msg = hl7.parse(msg)
+
+
 
     def extract_field(self, el):
         if isinstance(self.hl7_msg[el['segment']][el['segment_repetition']][el['field']][el['field_repetition']], list):
@@ -62,8 +74,8 @@ class HL7Extract:
             #print(f'Name: {el["name"]}')
             for src in el['source']: 
 
-                #print(f"\tNotation: {src['notation']}")
-                #print(f"\t[{src['segment']}][{src['segment_repetition']}][{src['field']}][{src['field_repetition']}][{src['component']}][{src['subcomponent']}]")
+                self.logger.debug(f"\tNotation: {src['notation']}")
+                self.logger.debug(f"\t[{src['segment']}][{src['segment_repetition']}][{src['field']}][{src['field_repetition']}][{src['component']}][{src['subcomponent']}]")
                 # FIELD only
                 if src['component'] == 0:
                     extract = self.extract_field(src) 
