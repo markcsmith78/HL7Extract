@@ -2,7 +2,7 @@
 
 from hl7_extract import HL7Extract
 from logging_setup import setup_logging
-import sys
+from json_validate import validate_config, validate_rules
 import logging
 import argparse
 
@@ -32,21 +32,22 @@ parser.add_argument(
     help="Enable debug logging"
 )
 
+
 logger = logging.getLogger(__name__)
 args = parser.parse_args()
 
 if args.debug:
     setup_logging(debug=True)
 
-#not actually using config yet, but this provides
-#the scaffolding for when we do
 if args.config:
     logger.info(f"Using {args.config} as config.")
-    extr = HL7Extract(args.rules, args.input)
+    config_file = args.config
 else: 
     logger.info("Using config.json as config.")
-    extr = HL7Extract(args.rules, args.input)
-    
+    config_file = "config.json"
+
+validate_config(config_file, "rules/" + args.rules)    
+extr = HL7Extract(args.rules, args.input)
 ret = extr.extract_all_hl7()
 
 if args.debug:
