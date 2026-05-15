@@ -24,20 +24,21 @@ def validate_schema(config, schema):
         raise ValueError("Config schema errors:\n" + "\n".join(messages))
 
 
-def validate_hl7extract_rules(config):
+def validate_hl7_rules(config):
     names = set()
 
-    for field in config.get("fields", []):
+    for field in config:
         name = field["name"]
-        path = field["path"]
 
         if name in names:
             raise ValueError(f"Duplicate output field name: {name}")
+
         names.add(name)
 
-        segment = path.split("-")[0]
-        if len(segment) != 3:
-            raise ValueError(f"Invalid HL7 segment in path: {path}")
+        for source in field["source"]:
+            segment = source["segment"]
+            if len(segment) != 3:
+                raise ValueError(f"Invalid HL7 segment in path: {path}")
 
         # Add deeper HL7Extract-specific checks here.
 
@@ -47,7 +48,7 @@ def validate_rules(rules_path, schema_path):
     schema = load_json(schema_path)
 
     validate_schema(rules, schema)
-    validate_hl7extract_rules(rules)
+    validate_hl7_rules(rules)
 
     return rules
 

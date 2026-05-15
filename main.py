@@ -5,6 +5,7 @@ from logging_setup import setup_logging
 from json_validate import validate_config, validate_rules
 import logging
 import argparse
+import sys
 
 parser = argparse.ArgumentParser()
 
@@ -22,7 +23,7 @@ parser.add_argument(
 
 parser.add_argument(
     "--config",
-    default="config.json",
+    default="config/keyval_config.json",
     help="System configuration file"
 )
 
@@ -36,18 +37,25 @@ parser.add_argument(
 logger = logging.getLogger(__name__)
 args = parser.parse_args()
 
+# DON'T access args after this! (except maybe for args.debug)
+rules_file = "rules/" + args.rules
+input_file = "input/" + args.input
+config_file = args.config
+
 if args.debug:
     setup_logging(debug=True)
 
-if args.config:
-    logger.info(f"Using {args.config} as config.")
-    config_file = args.config
-else: 
-    logger.info("Using config.json as config.")
-    config_file = "config.json"
+# system config file
+logger.info(f"Using {config_file} as config.")
+logger.debug(f"Validaing {config_file} against config.schema.json")
+validate_config(config_file, "config.schema.json")
 
-validate_config(config_file, "rules/" + args.rules)    
-extr = HL7Extract(args.rules, args.input)
+# hl7 rules file
+logger.info(f"Using rules_file for rules.")
+logger.debug(f"Validaing {rules_file} against rules.schema.json")
+validate_rules(rules_file, "rules.schema.json")   
+
+extr = HL7Extract(rules_file, input_file)
 ret = extr.extract_all_hl7()
 
 if args.debug:

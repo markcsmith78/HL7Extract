@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HL7Extract Field Configuration",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["name", "required", "source"],
+    "properties": {
+      "name": {
+        "type": "string",
+        "minLength": 1
+      },
+      "required": {
+        "type": "string",
+        "enum": ["R", "RE", "O"]
+      },
+      "source": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "object",
+          "required": [
+            "notation",
+            "segment",
+            "segment_repetition",
+            "field",
+            "field_repetition",
+            "component",
+            "subcomponent"
+          ],
+          "properties": {
+            "notation": {
+              "type": "string",
+              "pattern": "^[A-Z0-9]{3}-[0-9]+(\\.[0-9]+)?(\\.[0-9]+)?$"
+            },
+            "segment": {
+              "type": "string",
+              "pattern": "^[A-Z0-9]{3}$"
+            },
+            "segment_repetition": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "field": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "field_repetition": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "component": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "subcomponent": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    "additionalProperties": false
+  }
+}

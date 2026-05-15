@@ -7,7 +7,7 @@ import sys
 
 class HL7Extract:
     
-    # json_file and hl7_file shall be absolute
+    # json_file and hl7_file shall have the absolute file path
     def __init__(self, json_file, hl7_file):
         self.hl7_value = []
 
@@ -15,7 +15,6 @@ class HL7Extract:
         self.logger = logging.getLogger(__name__)
        
         # open & process JSON config 
-        logger.debug(f"Using {json_file} for rules.")
         try: 
             with open(json_file) as ifile:
                 self.rules_json = json.load(ifile)
@@ -27,7 +26,6 @@ class HL7Extract:
             sys.exit(1)
 
         # open & process hl7 input
-        logger.debug(f"Using {hl7_file} as input.")
         try:
             with open(hl7_file, "r") as ifile:
                 msg = ifile.read()
