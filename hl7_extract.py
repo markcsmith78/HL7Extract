@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 import json
 import hl7
 import logging
@@ -14,7 +12,7 @@ class HL7Extract:
         # system
         self.logger = logging.getLogger(__name__)
        
-        # open & process JSON config 
+        # open & process JSON rules 
         try: 
             with open(json_file) as ifile:
                 self.rules_json = json.load(ifile)
@@ -37,26 +35,26 @@ class HL7Extract:
         self.hl7_msg = hl7.parse(msg)
 
 
-    def extract_field(self, el):
+    def _extract_field(self, el):
         if isinstance(self.hl7_msg[el['segment']][el['segment_repetition']][el['field']][el['field_repetition']], list):
-            return '^'.join(self.flatten_strings(self.hl7_msg[el['segment']][el['segment_repetition']][el['field']][el['field_repetition']]))
+            return '^'.join(self._flatten_strings(self.hl7_msg[el['segment']][el['segment_repetition']][el['field']][el['field_repetition']]))
         else:
             return self.hl7_msg[el['segment']][el['segment_repetition']][el['field']][el['field_repetition']]
 
-    def extract_component(self, el):
+    def _extract_component(self, el):
         #TODO: test components, subcomponents
         component = el['component'] - 1 
         return self.hl7_msg[el['segment']][el['segment_repetition']][el['field']][el['field_repetition']][component][el['subcomponent']]
 
 
-    def flatten_strings(self, data):
+    def _flatten_strings(self, data):
         for item in data: 
             if isinstance(item, list):
-                yield from self.flatten_strings(item)
+                yield from self._flatten_strings(item)
             else:
                 yield item
 
-
+    # returns dictionary of 'notation' -> 'hl7 element' entries
     def extract_all_hl7(self):
         ret_list = {}
 	    # Notes: 
@@ -78,10 +76,10 @@ class HL7Extract:
                 self.logger.debug(f"\t[{src['segment']}][{src['segment_repetition']}][{src['field']}][{src['field_repetition']}][{src['component']}][{src['subcomponent']}]")
                 # FIELD only
                 if src['component'] == 0:
-                    extract = self.extract_field(src) 
+                    extract = self._extract_field(src) 
                 # COMPONENT
                 else: 
-                    extract = self.extract_component(src)
+                    extract = self._extract_component(src)
 
                 ret_list[el['name']] = extract 
 

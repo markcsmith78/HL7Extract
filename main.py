@@ -58,6 +58,9 @@ validate_rules(rules_file, "rules.schema.json")
 extr = HL7Extract(rules_file, input_file)
 ret = extr.extract_all_hl7()
 
+outStream = HL7Output(config_file, ret)
+
+
 if args.debug:
     for key in ret:
         logger.debug(f"{key} -> {ret[key]}")
