@@ -1,0 +1,45 @@
+{
+  "version": "1.0",
+
+  "output": {
+    "enabled": true,
+    "destinations": [
+      {
+        "type": "terminal",
+        "enabled": true,
+        "format": "key_value"
+      },
+      {
+        "type": "csv",
+        "enabled": false,
+        "path": "output/hl7extract.csv",
+        "format": "extracted_elements",
+        "include_header": true,
+        "append": true
+      },
+      {
+        "type": "network",
+        "enabled": false,
+        "host": "127.0.0.1",
+        "port": 9000,
+        "protocol": "tcp",
+        "format": "json"
+      }
+    ]
+  },
+
+  "ai": {
+    "enabled": false,
+    "provider": "openai",
+    "model": "gpt-5.2",
+    "use_on": [
+      "extracted_elements"
+    ],
+    "tasks": [
+      "summarize",
+      "classify",
+      "detect_missing_fields"
+    ],
+    "send_phi": false
+  }
+}

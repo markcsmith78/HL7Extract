@@ -1,6 +1,6 @@
-class HL7Ostream: 
+class OutputStream: 
 
-    def output(self):
+    def outout(self):
         raise NotImplementedError("Subclasses must implement output()")
 
         

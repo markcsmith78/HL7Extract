@@ -1,7 +1,9 @@
 import logging
 import sys
 
-class HL7Output: 
+#superclass for output subclasses.  defines the interface that
+#subclasses override to create polymorphic relationship
+class OutPutController: 
 
     def __init__(self, config_file, hl7_dict):
        

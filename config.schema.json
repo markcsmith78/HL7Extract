@@ -1,23 +1,167 @@
 {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "title": "HL7Extract Configuration",
-    "type": "object",
-
-    "properties": {
-        "output": {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HL7Extract Configuration",
+  "type": "object",
+  "required": ["version", "output"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "output": {
+      "type": "object",
+      "required": ["enabled", "destinations"],
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "destinations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "oneOf": [
+              { "$ref": "#/$defs/terminalDestination" },
+              { "$ref": "#/$defs/csvDestination" },
+              { "$ref": "#/$defs/networkDestination" }
+            ]
+          }
+        }
+      }
+    },
+    "ai": {
+      "type": "object",
+      "required": ["enabled"],
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "provider": {
+          "type": "string",
+          "enum": ["openai"]
+        },
+        "model": {
+          "type": "string"
+        },
+        "use_on": {
+          "type": "array",
+          "items": {
             "type": "string",
-            "enum": ["terminal"]
+            "enum": [
+              "raw_message",
+              "extracted_elements",
+              "formatted_output"
+            ]
+          }
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "summarize",
+              "classify",
+              "detect_missing_fields",
+              "explain_message",
+              "extract_insights"
+            ]
+          }
+        },
+        "send_phi": {
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "baseDestination": {
+      "type": "object",
+      "required": ["type", "enabled", "format"],
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
         },
         "format": {
-            "type": "string",
-            "enum": ["key-value"]
+          "type": "string",
+          "enum": [
+            "key_value",
+            "extracted_elements",
+            "json",
+            "csv_row",
+            "raw"
+          ]
         }
+      }
     },
-
-    "required": [
-        "output",
-        "format"
-    ],
-
-    "additionalProperties": false
+    "terminalDestination": {
+      "allOf": [
+        { "$ref": "#/$defs/baseDestination" },
+        {
+          "type": "object",
+          "required": ["type"],
+          "properties": {
+            "type": {
+              "const": "terminal"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "csvDestination": {
+      "allOf": [
+        { "$ref": "#/$defs/baseDestination" },
+        {
+          "type": "object",
+          "required": ["type", "path"],
+          "properties": {
+            "type": {
+              "const": "csv"
+            },
+            "path": {
+              "type": "string"
+            },
+            "include_header": {
+              "type": "boolean"
+            },
+            "append": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "networkDestination": {
+      "allOf": [
+        { "$ref": "#/$defs/baseDestination" },
+        {
+          "type": "object",
+          "required": ["type", "host", "port", "protocol"],
+          "properties": {
+            "type": {
+              "const": "network"
+            },
+            "host": {
+              "type": "string"
+            },
+            "port": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 65535
+            },
+            "protocol": {
+              "type": "string",
+              "enum": ["tcp", "udp"]
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
 }
