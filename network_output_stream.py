@@ -2,7 +2,7 @@ import logging
 from output_stream import OutputStream
 
 #extends OutputStream to create a class-specific implementation of send_output()
-class TerminalOutputStream(OutputStream):
+class NetworkOutputStream(OutputStream):
     
     def __init__(self, o_config, hl7dict):
         self.hl7_dict = hl7dict
@@ -12,7 +12,5 @@ class TerminalOutputStream(OutputStream):
 
     def send_output(self):
 
-        self.logger.debug("Using terminal output: ") 
-        for key in self.hl7_dict:
-            print(f"{key} -> {self.hl7_dict[key]}") 
+        self.logger.debug("Using network output: ") 
      

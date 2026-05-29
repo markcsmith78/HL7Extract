@@ -11,8 +11,8 @@
       },
       {
         "type": "csv",
-        "enabled": false,
-        "path": "output/hl7extract.csv",
+        "enabled": true,
+        "path": "hl7extract_output.csv",
         "format": "extracted_elements",
         "include_header": true,
         "append": true

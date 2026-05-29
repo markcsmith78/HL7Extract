@@ -47,6 +47,10 @@ def validate_rules(rules_path, schema_path):
     rules = load_json(rules_path)
     schema = load_json(schema_path)
 
+    #DEBUG
+    print(f"DEBUG: Using {rules_path} for rules")
+    print(f"DEBUG: Using {schema_path} for its schema")
+
     validate_schema(rules, schema)
     validate_hl7_rules(rules)
 
@@ -56,6 +60,10 @@ def validate_config(config_path, schema_path):
     config = load_json(config_path)
     schema = load_json(schema_path)
 
+    #DEBUG
+    print(f"DEBUG: Using {config_path} for config")
+    print(f"DEBUG: Using {schema_path} for its schema")
+     
     validate_schema(config, schema)
     #TODO: deeper config validation (file location, 
     # net access, etc) here

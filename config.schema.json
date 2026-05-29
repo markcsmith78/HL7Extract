@@ -3,7 +3,7 @@
   "title": "HL7Extract Configuration",
   "type": "object",
   "required": ["version", "output"],
-  "additionalProperties": false,
+  "unevaluatedProperties": false,
   "properties": {
     "version": {
       "type": "string"
@@ -11,7 +11,7 @@
     "output": {
       "type": "object",
       "required": ["enabled", "destinations"],
-      "additionalProperties": false,
+      "unevaluatedProperties": false,
       "properties": {
         "enabled": {
           "type": "boolean"
@@ -32,7 +32,7 @@
     "ai": {
       "type": "object",
       "required": ["enabled"],
-      "additionalProperties": false,
+      "unevaluatedProperties": false,
       "properties": {
         "enabled": {
           "type": "boolean"
@@ -75,93 +75,61 @@
     }
   },
   "$defs": {
-    "baseDestination": {
-      "type": "object",
-      "required": ["type", "enabled", "format"],
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "enabled": {
-          "type": "boolean"
-        },
-        "format": {
-          "type": "string",
-          "enum": [
-            "key_value",
-            "extracted_elements",
-            "json",
-            "csv_row",
-            "raw"
-          ]
-        }
-      }
-    },
-    "terminalDestination": {
-      "allOf": [
-        { "$ref": "#/$defs/baseDestination" },
-        {
-          "type": "object",
-          "required": ["type"],
-          "properties": {
-            "type": {
-              "const": "terminal"
-            }
-          },
-          "additionalProperties": false
-        }
-      ]
-    },
-    "csvDestination": {
-      "allOf": [
-        { "$ref": "#/$defs/baseDestination" },
-        {
-          "type": "object",
-          "required": ["type", "path"],
-          "properties": {
-            "type": {
-              "const": "csv"
-            },
-            "path": {
-              "type": "string"
-            },
-            "include_header": {
-              "type": "boolean"
-            },
-            "append": {
-              "type": "boolean"
-            }
-          },
-          "additionalProperties": false
-        }
-      ]
-    },
-    "networkDestination": {
-      "allOf": [
-        { "$ref": "#/$defs/baseDestination" },
-        {
-          "type": "object",
-          "required": ["type", "host", "port", "protocol"],
-          "properties": {
-            "type": {
-              "const": "network"
-            },
-            "host": {
-              "type": "string"
-            },
-            "port": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 65535
-            },
-            "protocol": {
-              "type": "string",
-              "enum": ["tcp", "udp"]
-            }
-          },
-          "additionalProperties": false
-        }
-      ]
-    }
+
+		"terminalDestination": {
+		  "type": "object",
+		  "required": ["type", "enabled", "format"],
+		  "additionalProperties": false,
+		  "properties": {
+		    "type": { "const": "terminal" },
+		    "enabled": { "type": "boolean" },
+		    "format": {
+		      "type": "string",
+		      "enum": ["key_value", "extracted_elements", "json", "csv_row", "raw"]
+		    }
+		  }
+		}, 
+
+		"csvDestination": {
+		  "type": "object",
+		  "required": ["type", "enabled", "format", "path"],
+		  "additionalProperties": false,
+		  "properties": {
+		    "type": { "const": "csv" },
+		    "enabled": { "type": "boolean" },
+		    "format": {
+		      "type": "string",
+		      "enum": ["key_value", "extracted_elements", "json", "csv_row", "raw"]
+		    },
+		    "path": { "type": "string" },
+		    "include_header": { "type": "boolean" },
+		    "append": { "type": "boolean" }
+		  }
+		},
+
+		"networkDestination": {
+		  "type": "object",
+		  "required": ["type", "enabled", "format", "host", "port", "protocol"],
+		  "additionalProperties": false,
+		  "properties": {
+		    "type": { "const": "network" },
+		    "enabled": { "type": "boolean" },
+		    "format": {
+		      "type": "string",
+		      "enum": ["key_value", "extracted_elements", "json", "csv_row", "raw"]
+		    },
+		    "host": { "type": "string" },
+		    "port": {
+		      "type": "integer",
+		      "minimum": 1,
+		      "maximum": 65535
+		    },
+		    "protocol": {
+		      "type": "string",
+		      "enum": ["tcp", "udp"]
+		    }
+		  }
+		}  
+
   }
 }

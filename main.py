@@ -3,9 +3,11 @@
 from hl7_extract import HL7Extract
 from logging_setup import setup_logging
 from json_validate import validate_config, validate_rules
+from output_controller import OutputController
 import logging
 import argparse
 import sys
+
 
 parser = argparse.ArgumentParser()
 
@@ -23,7 +25,7 @@ parser.add_argument(
 
 parser.add_argument(
     "--config",
-    default="config/keyval_config.json",
+    default="config/config.json",
     help="System configuration file"
 )
 
@@ -56,13 +58,9 @@ logger.debug(f"Validaing {rules_file} against rules.schema.json")
 validate_rules(rules_file, "rules.schema.json")   
 
 extr = HL7Extract(rules_file, input_file)
-ret = extr.extract_all_hl7()
+el_dict = extr.extract_all_hl7()
 
-outStream = HL7Output(config_file, ret)
-
-
-if args.debug:
-    for key in ret:
-        logger.debug(f"{key} -> {ret[key]}")
+outController = OutputController(config_file, el_dict)
+outController.printAllElements()
 
 sys.exit(0)

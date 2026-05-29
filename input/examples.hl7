@@ -1,0 +1,27 @@
+MSH|^~\&|TEST_APP|TEST_FAC|EXTRACTOR|DEV|20260424071500||ADT^A01^ADT_A01|MSG000001|P|2.5.1
+EVN|A01|20260424071500|||^ADAMS^JULIA^^^^^^NPI
+PID|1||123456^^^TEST_FAC^MR~67890^^^STATE^SS||DOE^JOHN^A||19800514~19800513|M|||123 MAIN ST^^DURANGO^CO^81301^USA||970-555-1000|||M||987654321
+PV1|1|I|MEDSURG^201^A^TEST_FAC||||1234^SMITH^ROBERT^^^^^^NPI|5678^JONES^AMY^^^^^^NPI|||||||||||V1234567|||||||||||||||||||||||||20260424071000
+PV2|||Admitted for abdominal pain and dehydration|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||Expected discharge in 2 days
+DG1|1||R10.9^Unspecified abdominal pain^I10|Abdominal pain|20260424070000|A
+OBX|1|NM|8480-6^Systolic blood pressure^LN||138|mm[Hg]^millimeter of mercury^UCUM|90-120|H|||F|||20260424071200
+OBX|2|NM|8462-4^Diastolic blood pressure^LN||86|mm[Hg]^millimeter of mercury^UCUM|60-80|H|||F|||20260424071200
+OBX|3|ST|SS001^Chief complaint^PHINQUESTION||Abdominal pain with nausea||||||F|||20260424071200MSH|^~\&|TEST_APP|TEST_FAC|EXTRACTOR|DEV|20260424072500||ADT^A04^ADT_A01|MSG000002|P|2.5.1
+EVN|A04|20260424072500|||^MILLER^KAREN^^^^^^NPI
+PID|1||789012^^^TEST_FAC^MR||MARTINEZ^ELENA^R||19920322|F|||456 OAK AVE^^FARMINGTON^NM^87401^USA||505-555-2222|||S||555443333
+PV1|1|O|CLINIC^03^1^TEST_FAC||||2222^PATEL^NISHA^^^^^^NPI||||||||||||V7654321|||||||||||||||||||||||||20260424072000
+PV2|||Outpatient evaluation for cough and fever|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||Discharge home after evaluation
+DG1|1||R05.9^Cough, unspecified^I10|Cough|20260424072100|A
+DG1|2||R50.9^Fever, unspecified^I10|Fever|20260424072100|A
+OBX|1|NM|8310-5^Body temperature^LN||38.4|Cel^degree Celsius^UCUM|36.1-37.2|H|||F|||20260424072200
+OBX|2|NM|8867-4^Heart rate^LN||104|/min^per minute^UCUM|60-100|H|||F|||20260424072200
+OBX|3|CWE|94531-1^SARS-CoV-2 RNA panel^LN||260373001^Detected^SCT||||||F|||20260424072300MSH|^~\&|TEST_APP|TEST_FAC|EXTRACTOR|DEV|20260424073500||ADT^A08^ADT_A01|MSG000003|P|2.5.1
+EVN|A08|20260424073500|||^LEE^MICHAEL^^^^^^NPI
+PID|1||345678^^^TEST_FAC^MR||BROWN^SAMUEL^T||19471102|M|||789 PINE RD^^CORTEZ^CO^81321^USA||970-555-3333|||M||222334444
+PV1|1|E|ED^05^B^TEST_FAC||||3333^WILSON^ERIN^^^^^^NPI|4444^NGUYEN^DAVID^^^^^^NPI|||||||||||E4567890|||||||||||||||||||||||||20260424073000
+PV2|||Emergency visit for shortness of breath|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||Observation status pending
+DG1|1||R06.02^Shortness of breath^I10|Shortness of breath|20260424073100|A
+DG1|2||I50.9^Heart failure, unspecified^I10|Heart failure|20260424073200|W
+OBX|1|NM|59408-5^Oxygen saturation in Arterial blood by Pulse oximetry^LN||89|%^percent^UCUM|95-100|L|||F|||20260424073300
+OBX|2|NM|9279-1^Respiratory rate^LN||26|/min^per minute^UCUM|12-20|H|||F|||20260424073300
+OBX|3|ST|SS003^Triage note^PHINQUESTION||Patient reports worsening dyspnea over two days||||||F|||20260424073400

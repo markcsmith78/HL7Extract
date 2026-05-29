@@ -5,8 +5,8 @@ import sys
 
 class HL7Extract:
     
-    # json_file and hl7_file shall have the absolute file path
-    def __init__(self, json_file, hl7_file):
+    # json files, shall have the absolute file path
+    def __init__(self, j_rules, j_config):
         self.hl7_value = []
 
         # system
@@ -14,16 +14,28 @@ class HL7Extract:
        
         # open & process JSON rules 
         try: 
-            with open(json_file) as ifile:
-                self.rules_json = json.load(ifile)
+            with open(j_rules) as ifile:
+                self.json_rules = json.load(ifile)
         except FileNotFoundError:
-            self.logger.critical(f"File not found: {json_file}.")
+            self.logger.critical(f"File not found: {j_rules}.")
             sys.exit(1)
         except json.JSONDecodeError as e:
             self.logger.critical(f"Invalid JSON: {e}")
             sys.exit(1)
 
+        # open & process JSON config 
+        try: 
+            with open(j_config) as ifile:
+                self.json_config = json.load(ifile)
+        except FileNotFoundError:
+            self.logger.critical(f"File not found: {j_config}.")
+            sys.exit(1)
+        except json.JSONDecodeError as e:
+            self.logger.critical(f"Invalid JSON: {e}")
+            sys.exit(1)
         # open & process hl7 input
+        self.input_stream = HL7InputStream(self.json_config)
+    
         try:
             with open(hl7_file, "r") as ifile:
                 msg = ifile.read()
@@ -67,7 +79,7 @@ class HL7Extract:
 	    #    be at least 2 components in the field -- it will not return the entire field as 
 	    #    the only component  (see #3)
         
-        for el in self.rules_json:
+        for el in self.json_rules:
         #TODO: add propper debugging 
             #print(f'Name: {el["name"]}')
             for src in el['source']: 
