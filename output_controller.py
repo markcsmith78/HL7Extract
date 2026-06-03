@@ -8,6 +8,8 @@ from csv_output_stream import CSVOutputStream
 #'Controller' class used to instantiate OutputStream subclasse objects
 class OutputController: 
 
+    #TODO: have config_file loaded before initializing the object, then
+    #      pass j_config dictionary as paramater and don't load the json here
     def __init__(self, config_file, hl7_dict):
 
         self.logger = logging.getLogger(__name__)

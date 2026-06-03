@@ -2,12 +2,19 @@ import json
 import hl7
 import logging
 import sys
+from hl7input_stream import HL7InputStream
+from input_factory import InputFactory
 
 class HL7Extract:
     
-    # json files, shall have the absolute file path
+    # json files shall have the absolute file path
     def __init__(self, j_rules, j_config):
-        self.hl7_value = []
+        # holds the raw hl7 msg string
+        self._raw_hl7_msg = ""
+        # holds the dictionary containing all the elements pulled from the above
+        self._parsed_hl7_msg = {}
+        # holds select elements form the above
+        self._extracted_elements = {}
 
         # system
         self.logger = logging.getLogger(__name__)
@@ -33,30 +40,20 @@ class HL7Extract:
         except json.JSONDecodeError as e:
             self.logger.critical(f"Invalid JSON: {e}")
             sys.exit(1)
-        # open & process hl7 input
-        self.input_stream = HL7InputStream(self.json_config)
+
+        # setup our input stream
+        self.input_stream = InputFactory.create(self.json_config)
     
-        try:
-            with open(hl7_file, "r") as ifile:
-                msg = ifile.read()
-        except FileNotFoundError:
-            self.logger.critical(f"ERROR: File not found {hl7_file}.")
-            sys.exit(1)
-
-        msg = msg.replace('\r\n', '\r').replace('\n', '\r')
-        self.hl7_msg = hl7.parse(msg)
-
-
     def _extract_field(self, el):
-        if isinstance(self.hl7_msg[el['segment']][el['segment_repetition']][el['field']][el['field_repetition']], list):
-            return '^'.join(self._flatten_strings(self.hl7_msg[el['segment']][el['segment_repetition']][el['field']][el['field_repetition']]))
+        if isinstance(self._parsed_hl7_msg[el['segment']][el['segment_repetition']][el['field']][el['field_repetition']], list):
+            return '^'.join(self._flatten_strings(self._hl7_msg[el['segment']][el['segment_repetition']][el['field']][el['field_repetition']]))
         else:
-            return self.hl7_msg[el['segment']][el['segment_repetition']][el['field']][el['field_repetition']]
+            return self._parsed_hl7_msg[el['segment']][el['segment_repetition']][el['field']][el['field_repetition']]
 
     def _extract_component(self, el):
         #TODO: test components, subcomponents
         component = el['component'] - 1 
-        return self.hl7_msg[el['segment']][el['segment_repetition']][el['field']][el['field_repetition']][component][el['subcomponent']]
+        return self._parsed_hl7_msg[el['segment']][el['segment_repetition']][el['field']][el['field_repetition']][component][el['subcomponent']]
 
 
     def _flatten_strings(self, data):
@@ -67,7 +64,7 @@ class HL7Extract:
                 yield item
 
     # returns dictionary of 'notation' -> 'hl7 element' entries
-    def extract_all_hl7(self):
+    def _extract_elements(self):
         ret_list = {}
 	    # Notes: 
 	    # 1) Repeating segments will be represented by the following notation:
@@ -97,4 +94,21 @@ class HL7Extract:
 
         return ret_list
         
-    
+    def get_elements(self):
+
+        self.logger.debug("Parsing msg...")
+
+        self._raw_hl7_msg = self.input_stream.get_msg()
+
+        # if the input stream is dry, return an empty string
+        if (self._raw_hl7_msg == ""):
+            return ""
+        else: 
+            #for segment in self._raw_hl7_msg.split('\r'):
+            #   self.logger.debug(segment)
+
+            self._parsed_hl7_msg = hl7.parse(self._raw_hl7_msg)
+	        
+            self._extracted_elements = self._extract_elements()
+            return self._extracted_elements 
+

@@ -13,6 +13,9 @@ class TerminalOutputStream(OutputStream):
     def send_output(self):
 
         self.logger.debug("Using terminal output: ") 
+        print("---------------------------------")
+        print("------------ MSG ----------------")
+        print("---------------------------------")
         for key in self.hl7_dict:
             print(f"{key} -> {self.hl7_dict[key]}") 
      

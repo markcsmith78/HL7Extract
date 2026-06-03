@@ -4,6 +4,9 @@ from output_stream import OutputStream
 
 #extends OutputStream to create a class-specific implementation of send_output()
 class CSVOutputStream(OutputStream):
+
+    # turn this on after headers have been printed
+    headers_printed = 0 
     
     def __init__(self, o_config, hl7dict):
         self.hl7_dict = hl7dict
@@ -21,13 +24,18 @@ class CSVOutputStream(OutputStream):
         self.logger.debug("Using CSV output: ") 
         
         for key in self.hl7_dict:
-            headers.append(key)
+            if (not CSVOutputStream.headers_printed):
+	            headers.append(key)
             out_arr.append(self.hl7_dict[key])
 
         try: 
-            with open(self.out_config['path'], 'w', newline='') as ofile:
+            with open(self.out_config['path'], 'a', newline='') as ofile:
                 csv_writer = csv.writer(ofile)
-                csv_writer.writerow(headers)
+
+                if (not CSVOutputStream.headers_printed):
+                    csv_writer.writerow(headers)
+                    CSVOutputStream.headers_printed = 1
+
                 csv_writer.writerow(out_arr) 
         except OSError as e:
             print(f'File error: {e}')
