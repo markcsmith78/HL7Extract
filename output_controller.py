@@ -5,7 +5,7 @@ from terminal_output_stream import TerminalOutputStream
 from network_output_stream import NetworkOutputStream
 from csv_output_stream import CSVOutputStream
 
-#'Controller' class used to instantiate OutputStream subclasse objects
+#'Controller' class used to instantiate OutputStream subclass objects
 class OutputController: 
 
     #TODO: have config_file loaded before initializing the object, then

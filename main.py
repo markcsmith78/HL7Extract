@@ -51,12 +51,12 @@ if args.debug:
 # validate system config file
 logger.info(f"Using {config_file} as config.")
 logger.debug(f"Validaing {config_file} against config.schema.json")
-validate_config(config_file, "config.schema.json")
+validate_config(config_file, "schemas/config.schema.json")
 
 # validate hl7 rules file
 logger.info(f"Using rules_file for rules.")
 logger.debug(f"Validaing {rules_file} against rules.schema.json")
-validate_rules(rules_file, "rules.schema.json")   
+validate_rules(rules_file, "schemas/rules.schema.json")   
 
 extr = HL7Extract(rules_file, config_file)
 el_dict = extr.get_elements()
