@@ -5,11 +5,14 @@ HL7Extract has been renamed to PacketBandit.
 The project continues to focus on HL7 v2.x extraction, transformation, monitoring and healthcare interoperability.
 
 PacketBandit is an open-source Python framework for transforming raw HL7 v2.x message streams into structured, analysis-ready datasets. It is designed to support clinical data analysis, interoperability workflows, and downstream applications such as quality reporting, validation, regulatory compliance and Electronic Lab Reporting.
-To be fair, extracting fields from HL7 messages is not edge-of-your-seat exciting.  It doesn't make for good dinner convesation and it's not status update material.  But, if you're troubleshooting interfaces or analyzing large sets of HL7 messages, this is for you.  PacketBandit relieves you of the burden of counting out 'pipes' and 'hats'.  It wrassles unweildly HL7 messages that wrap several lines in your text editor into the manageable, domesticated set of fields you're interested in.  Everything else stays outside in the wild.
 Configuring element extraction and PacketBandit's behavior (input/output sources) is done through JSON configuration files.  These are semantically validated against schemas before their rules are applied.  Using schema-validated extraction rules allows PacketBandit to be configured for endless different applications: Syndronic Surveillance ADT stream extraction, interfacility debugging (i.e. OBX messages from bedside monitors or medication dispensing systems), message compliance (i.e. between a local EHR and a third party system).
 The latest release is Version 0.05.  It supports flat file input (MLLP framed), and can output to a terminal as key/value pairs or to a CSV file for importing into a spreadsheet application.  Schema-validation is robust and can isolate elements from the field to the subcomponent level.  Future enhancements include CSV input (commonly used between EHRs and state entities for regulatory compliance), network stream input and colorized terminal output for debugging.
 
 ---
+
+## Why PacketBandit Exists
+
+PacketBandit was developed while supporting hospital interoperability workflows, regulatory reporting initiatives, and HL7 interface troubleshooting. The goal was to provide a reusable framework for converting complex HL7 message streams into structured datasets suitable for analysis, validation, and automation.
 
 ## Overview
 
