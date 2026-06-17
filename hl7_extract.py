@@ -99,6 +99,10 @@ class HL7Extract:
         self.logger.debug("Parsing msg...")
 
         self._raw_hl7_msg = self.input_stream.get_msg()
+        
+        #normalize newlines into carriage returns
+        self._raw_hl7_msg = self._raw_hl7_msg.replace("\n\r", "\r")
+        self._raw_hl7_msg = self._raw_hl7_msg.replace("\n", "\r")
 
         # if the input stream is dry, return an empty string
         if (self._raw_hl7_msg == ""):

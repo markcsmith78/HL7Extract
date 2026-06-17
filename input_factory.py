@@ -2,7 +2,7 @@ import json
 import logging
 import sys
 from hl7file_input import HL7FileInput
-#from hl7net_input import HL7NetInput
+from hl7net_input import HL7NetInput
 
 class InputFactory: 
     
@@ -16,7 +16,8 @@ class InputFactory:
                 logger.debug(f'Using file {j_config["input"]["path"]} as input')
                 return HL7FileInput(j_config)
             case "network":     
-                self.logger.debug(f'Using {j_config["input"]["host"]}:{j_config["input"]["port"]} as input')
+                logger.debug(f'Using {j_config["input"]["host"]}:{j_config["input"]["port"]} as input')
+                return HL7NetInput(j_config)
             case _:
-                self.logger.critical('Unexpected output specified.  Exiting.')
+                logger.critical('Unexpected output specified.  Exiting.')
                 sys.exit(1)  
