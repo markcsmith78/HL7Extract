@@ -106,6 +106,7 @@ class HL7Extract:
 
         # if the input stream is dry, return an empty string
         if (self._raw_hl7_msg == ""):
+            self.input_stream.close()
             return ""
         else: 
             #for segment in self._raw_hl7_msg.split('\r'):

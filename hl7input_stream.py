@@ -1,6 +1,7 @@
 import json
 import logging
 import sys
+from abc import ABC, abstractmethod
 
 class HL7InputStream:
 
@@ -13,10 +14,16 @@ class HL7InputStream:
         self.logger.debug('Initializing HL7InputStream object')
 
         self._setup_input()
-        
-    def get_msg(self):
-        raise NotImplementedError("Subclasses must implement output()")
-
+       
+    @abstractmethod 
     def _setup_input(self):
-        raise NotImplementedError("Subclasses must implement output()")
+        pass
+
+    @abstractmethod
+    def get_msg(self):
+        pass
     
+    @abstractmethod
+    def close(self):
+        pass
+

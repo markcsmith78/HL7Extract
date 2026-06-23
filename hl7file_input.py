@@ -45,5 +45,9 @@ class HL7FileInput(HL7InputStream):
             return self._msg_list.pop()
         else:
             return "" 
-         
+
+    # this method is really for awaitable i/o operations like networking, but 
+    # I need to extend it, so here it is
+    def close(self):
+        pass         
 

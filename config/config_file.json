@@ -2,12 +2,10 @@
   "version": "1.0",
 
   "input": {
-        "type": "network",
-        "host": "127.0.0.1",
-        "port": 5000,
-        "protocol": "tcp",
-        "format": "mllp"
-    }, 
+        "type": "file",
+        "path": "input/examples.hl7",
+        "format": "hl7"
+  },
 
   "output": {
     "enabled": true,
@@ -19,7 +17,7 @@
       },
       {
         "type": "csv",
-        "enabled": false,
+        "enabled": true,
         "path": "hl7extract_output.csv",
         "format": "extracted_elements",
         "include_header": true,
