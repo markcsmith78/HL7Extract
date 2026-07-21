@@ -9,26 +9,37 @@ class HL7NetInput(HL7InputStream):
 
     def get_msg(self):
         
+        MLLP_START = b"\x0b"
+        MLLP_END = b"\x1c\x0d"
+    
         conn, addr = self.server_socket.accept()
-
         self.logger.debug("Accepted connection from %s", addr)
-
-        try: 
-            #msg = b""
-        
-            #while b"\x1c\x0d" not in msg:
-            msg = conn.recv(1024)
-
-            #    if not chunk: 
-            #        break
-
-            #    msg += chunk
-
-            #msg = msg.lstrip(b"\x0b").rstrip(b"\x1c\x0d")
-            self._hl7_msg = msg.decode("utf-8")
-
+    
+        buffer = bytearray()
+    
+        try:
+            while MLLP_END not in buffer:
+                chunk = conn.recv(4096)
+    
+                if not chunk:
+                    raise ConnectionError(
+                        "Connection closed before complete MLLP message was received"
+                    )
+    
+                buffer.extend(chunk)
+    
+            start_index = buffer.find(MLLP_START)
+            end_index = buffer.find(MLLP_END)
+    
+            if start_index == -1:
+                raise ValueError("MLLP start character not found")
+    
+            message_bytes = buffer[start_index + 1:end_index]
+    
+            self._hl7_msg = message_bytes.decode("utf-8")
+    
             self.logger.debug("Received %s", self._hl7_msg)
-
+    
             return self._hl7_msg
 
         finally:
