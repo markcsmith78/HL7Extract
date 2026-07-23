@@ -117,3 +117,6 @@ class HL7Extract:
             self._extracted_elements = self._extract_elements()
             return self._extracted_elements 
 
+    def close_input(self):
+        self.logger.info("Closing input stream")
+        self.input_stream.close()

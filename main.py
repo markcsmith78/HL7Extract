@@ -59,17 +59,20 @@ logger.debug(f"Validaing {rules_file} against rules.schema.json")
 validate_rules(rules_file, "schemas/rules.schema.json")   
 
 extr = HL7Extract(rules_file, config_file)
-el_dict = extr.get_elements()
-while (el_dict):
-    logger.debug("Processing next message")
-    #TODO: change outController to print continuously instead
-    # of creating a new instance of it for every time we want to 
-    # print
-    outController = OutputController(config_file, el_dict)
-    outController.printAllElements()
-    el_dict = {}
-    el_dict = extr.get_elements()
 
+try: 
+	el_dict = extr.get_elements()
+	while (el_dict):
+	    logger.debug("Processing next message")
+	    #TODO: change outController to print continuously instead
+	    # of creating a new instance of it for every time we want to 
+	    # print
+	    outController = OutputController(config_file, el_dict)
+	    outController.printAllElements()
+	    el_dict = extr.get_elements()
+except KeyboardInterrupt:
+    logger.info("Shutdown requested")
+    extr.close_input()
 logger.debug("Done processing")
 
 
